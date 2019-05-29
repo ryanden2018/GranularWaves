@@ -11,7 +11,7 @@ class GranularWaves implements ActionListener {
     gwg = new GranularWavesGraphics();
 
     jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    jfrm.setBackground(Color.white);
+    jfrm.setBackground(Color.gray);
     jfrm.add(gwg, BorderLayout.CENTER);
     jfrm.pack();
     jfrm.setResizable(false);

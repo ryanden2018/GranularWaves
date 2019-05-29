@@ -8,7 +8,6 @@ class GranularWavesData {
 
   GranularWavesData(double mass, int N, double dt, double width) {
     this.dt = dt;
-    //int numSprings = 2*(N-2)*(N-3) + 2*(N-2)*(N-3) + 4*(N-2) + (N-2);
     int numSprings = (N-1)*(N-1)*4;
     springs = new Spring[numSprings];
     masses = new Mass[N*N];
@@ -27,56 +26,19 @@ class GranularWavesData {
 
     int idx = 0; // spring index
 
+    // initialize all springs
     for( int i = 0; i < N-1; i++) {
       for(int j = 0; j < N-1; j++) {
-        springs[idx] = new Spring( masses[N*i+j], masses[N*i+(j+1)], dx, 5.0);
+        springs[idx] = new Spring( masses[N*i+j], masses[N*i+(j+1)], dx, 2.0);
         idx++;
-        springs[idx] = new Spring( masses[N*i+j], masses[N*(i+1)+j], dx, 5.0);
+        springs[idx] = new Spring( masses[N*i+j], masses[N*(i+1)+j], dx, 2.0);
         idx++;
-        springs[idx] = new Spring( masses[N*i+j], masses[N*(i+1)+(j+1)], dx, 5.0);
+        springs[idx] = new Spring( masses[N*i+j], masses[N*(i+1)+(j+1)], dx*Math.sqrt(2), 2.0);
         idx++;
-        springs[idx] = new Spring( masses[N*i+(j+1)], masses[N*(i+1)+j], dx, 5.0);
+        springs[idx] = new Spring( masses[N*i+(j+1)], masses[N*(i+1)+j], dx*Math.sqrt(2), 2.0);
         idx++;
       }
     }
-
-    // // interior vertical springs
-    // for( int i = 1; i < N-2; i++) {
-    //   for(int j=1; j < N-1; j++) {
-    //     springs[idx] = new Spring( masses[N*i+j], masses[N*(i+1)+j], dx, 5.0);
-    //     idx++;
-    //     springs[idx] = new Spring( masses[N*i+j], masses[N*(i+1)+(j+1)], dx, 5.0);
-    //     idx++;
-    //     springs[idx] = new Spring( masses[N*i+(j+1)], masses[N*(i+1)+j], dx, 5.0);
-    //     idx++;
-    //   }
-    // }
-
-    // // interior horizontal springs
-    // for( int i = 1; i < N-1; i++) {
-    //   for(int j = 1; j < N-2; j++) {
-    //     springs[idx] = new Spring( masses[N*i+j], masses[N*i+(j+1)], dx, 5.0);
-    //     idx++;
-    //   }
-    // }
-
-    // // left and right side springs
-    // for( int i = 1; i < N-1; i++) {
-    //   springs[idx] = new Spring( masses[N*i], masses[N*i+1], dx, 1.0);
-    //   idx++;
-    //   springs[idx] = new Spring( masses[N*i+(N-2)], masses[N*i+(N-1)], dx, 5.0);
-    //   idx++;
-    //   springs[idx] = new Spring( masses[N*i+(N-2)], masses[N*(i+1)+(N-1)],dx,5.0);
-    //   idx++;
-    // }
-
-    // // upper and lower side springs
-    // for( int j = 1; j < N-1; j++) {
-    //   springs[idx] = new Spring( masses[j], masses[N+j], dx, 1.0);
-    //   idx++;
-    //   springs[idx] = new Spring( masses[N*(N-2)+j], masses[N*(N-1)+j], dx, 5.0);
-    //   idx++;
-    // }
   }
 
   // update the internal data by one timestep following Newton's laws
