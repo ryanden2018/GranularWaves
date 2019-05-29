@@ -4,11 +4,11 @@ import java.util.*;
 import java.awt.event.*;
 
 class GranularWavesGraphics extends JComponent implements MouseMotionListener {
-  int WIDTH = 650;
+  int WIDTH = 750;
   int HEIGHT = WIDTH;
   double MASS = 1.0;
-  int N = 40;
-  double DT = 0.01;
+  int N = 60;
+  double DT = 0.1;
   GranularWavesData gwd;
 
   GranularWavesGraphics() {
