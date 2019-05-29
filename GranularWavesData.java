@@ -29,13 +29,13 @@ class GranularWavesData {
     // initialize all springs
     for( int i = 0; i < N-1; i++) {
       for(int j = 0; j < N-1; j++) {
-        springs[idx] = new Spring( masses[N*i+j], masses[N*i+(j+1)], dx, 2.0);
+        springs[idx] = new Spring( masses[N*i+j], masses[N*i+(j+1)], dx, 4.0);
         idx++;
-        springs[idx] = new Spring( masses[N*i+j], masses[N*(i+1)+j], dx, 2.0);
+        springs[idx] = new Spring( masses[N*i+j], masses[N*(i+1)+j], dx, 4.0);
         idx++;
-        springs[idx] = new Spring( masses[N*i+j], masses[N*(i+1)+(j+1)], dx*Math.sqrt(2), 2.0);
+        springs[idx] = new Spring( masses[N*i+j], masses[N*(i+1)+(j+1)], dx*Math.sqrt(2), 4.0);
         idx++;
-        springs[idx] = new Spring( masses[N*i+(j+1)], masses[N*(i+1)+j], dx*Math.sqrt(2), 2.0);
+        springs[idx] = new Spring( masses[N*i+(j+1)], masses[N*(i+1)+j], dx*Math.sqrt(2), 4.0);
         idx++;
       }
     }

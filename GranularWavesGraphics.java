@@ -70,7 +70,7 @@ class GranularWavesGraphics extends JComponent implements MouseMotionListener {
   }
 
   Color makeColor(double[] xVals,double[] yVals) {
-    float val = Math.min((float)0.99, (float)triangleArea(xVals,yVals)*(float)(3/Math.pow(WIDTH/(N-1),2)));
+    float val = Math.min((float)0.99, (float)Math.pow(triangleArea(xVals,yVals)*(float)(3.0/Math.pow(WIDTH/(N-1),2)),4));
     return new Color(val,val,val);
   }
 
