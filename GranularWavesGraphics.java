@@ -34,31 +34,19 @@ class GranularWavesGraphics extends JComponent implements MouseMotionListener {
 
         double[] xVals = { (gwd.masses[N*i+j].posX), (gwd.masses[N*i+(j+1)].posX), midptX };
         double[] yVals = { (gwd.masses[N*i+j].posY), (gwd.masses[N*i+(j+1)].posY), midptY };
-        ((Graphics2D)g).setColor(
-          makeColor(xVals,yVals)
-        );
-        g.fillPolygon(castToInt(xVals),castToInt(yVals),3);
-
-
-        double[] xVals2 = { (gwd.masses[N*i+j].posX), (gwd.masses[N*(i+1)+j].posX), midptX };
+        double[] xVals2 =  { (gwd.masses[N*i+j].posX), (gwd.masses[N*(i+1)+j].posX), midptX };
         double[] yVals2 = { (gwd.masses[N*i+j].posY),  (gwd.masses[N*(i+1)+j].posY), midptY };
-        ((Graphics2D)g).setColor(
-          makeColor(xVals2,yVals2)
-        );
-        g.fillPolygon(castToInt(xVals2),castToInt(yVals2),3);
-
         double[] xVals3 = { (gwd.masses[N*(i+1)+(j+1)].posX), (gwd.masses[N*(i+1)+j].posX), midptX };
         double[] yVals3 = { (gwd.masses[N*(i+1)+(j+1)].posY), (gwd.masses[N*(i+1)+j].posY), midptY };
-        ((Graphics2D)g).setColor(
-          makeColor(xVals3,yVals3)
-        );
-        g.fillPolygon(castToInt(xVals3),castToInt(yVals3),3);
+        double[] xVals4 =  {  (gwd.masses[N*(i+1)+(j+1)].posX),  (gwd.masses[N*i+(j+1)].posX), midptX };
+        double[] yVals4 =  {  (gwd.masses[N*(i+1)+(j+1)].posY),  (gwd.masses[N*i+(j+1)].posY), midptY };
 
-        double[] xVals4 = {  (gwd.masses[N*(i+1)+(j+1)].posX),  (gwd.masses[N*i+(j+1)].posX), midptX };
-        double[] yVals4 = {  (gwd.masses[N*(i+1)+(j+1)].posY),  (gwd.masses[N*i+(j+1)].posY), midptY };
-        ((Graphics2D)g).setColor(
-          makeColor(xVals4,yVals4)
-        );
+        float val = (makeColor(xVals,yVals)+makeColor(xVals2,yVals2)+makeColor(xVals3,yVals3)+makeColor(xVals4,yVals4))/((float)4.0);
+        ((Graphics2D)g).setColor( new Color(val,val,val) );
+
+        g.fillPolygon(castToInt(xVals),castToInt(yVals),3);
+        g.fillPolygon(castToInt(xVals2),castToInt(yVals2),3);
+        g.fillPolygon(castToInt(xVals3),castToInt(yVals3),3);
         g.fillPolygon(castToInt(xVals4),castToInt(yVals4),3);
       }
     }
@@ -69,9 +57,9 @@ class GranularWavesGraphics extends JComponent implements MouseMotionListener {
     return result;
   }
 
-  Color makeColor(double[] xVals,double[] yVals) {
+  float makeColor(double[] xVals,double[] yVals) {
     float val = Math.min((float)0.99, (float)Math.pow(triangleArea(xVals,yVals)*(float)(3.0/Math.pow(WIDTH/(N-1),2)),4));
-    return new Color(val,val,val);
+    return val;
   }
 
   // compute area of triangle using Heron's formula
