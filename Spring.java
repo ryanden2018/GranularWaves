@@ -15,8 +15,13 @@ class Spring {
     return Math.sqrt( Math.pow(mass1.posX-mass2.posX,2) + Math.pow(mass1.posY-mass2.posY,2) );
   }
 
+
+  double func(double input) {
+    return input+0.075*input*input*input;
+  }
+
   double forceScalar() {
-    return springConstant * (restingLength-dist());
+    return springConstant * func(restingLength-dist());
   }
 
   double forceX() {
